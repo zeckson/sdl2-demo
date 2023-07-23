@@ -15,4 +15,7 @@ compile: clean
 clean:
 	rm -rf $(BUILD_DIR)
 
+run: compile
+	$(BUILD_DIR)/${OBJ_NAME}
+
 all: compile
