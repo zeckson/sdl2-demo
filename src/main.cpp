@@ -2,6 +2,32 @@
 
 #include "SDL.h"
 
+SDL_Window *setupWindow(const char *title, int width = 800, int height = 600) {
+    if (SDL_Init(SDL_INIT_VIDEO) < 0) {
+        std::cout << "SDL could not be initialized: " << SDL_GetError();
+    } else {
+        std::cout << "SDL video system is ready to go\n";
+    }
+
+    // Create an application window with the following settings:
+    SDL_Window *window = SDL_CreateWindow(
+            title,        // window title
+            SDL_WINDOWPOS_UNDEFINED, // initial x position
+            SDL_WINDOWPOS_UNDEFINED, // initial y position
+            width,                     // width, in pixels
+            height,                     // height, in pixels
+            SDL_WINDOW_SHOWN         // flags - see below
+    );
+
+    // Check that the window was successfully created
+    if (window == nullptr) {
+        // In the case that the window could not be made...
+        printf("Could not create window: %s\n", SDL_GetError());
+    }
+
+    return window;
+}
+
 int main() {
     int resW = 1280;
     int resH = 720;
@@ -18,43 +44,24 @@ int main() {
     bool downArrowDown = false;
     bool rightArrowDown = false;
 
-    SDL_Window *window = nullptr;
-    SDL_Renderer *renderer = nullptr;
-    bool appIsRunning = true;
+    SDL_Window *window = setupWindow("An SDL2 window", resW, resH);
 
-    int numMillisToThrottle = 6;
-    Uint64 lastDrawTime = SDL_GetTicks64();
-
-    if (SDL_Init(SDL_INIT_VIDEO) < 0) {
-        std::cout << "SDL could not be initialized: " << SDL_GetError();
-    } else {
-        std::cout << "SDL video system is ready to go\n";
-    }
-
-    // Create an application window with the following settings:
-    window = SDL_CreateWindow(
-            "An SDL2 window",        // window title
-            SDL_WINDOWPOS_UNDEFINED, // initial x position
-            SDL_WINDOWPOS_UNDEFINED, // initial y position
-            resW,                     // width, in pixels
-            resH,                     // height, in pixels
-            SDL_WINDOW_SHOWN         // flags - see below
-    );
-
-    // Check that the window was successfully created
-    if (window == NULL) {
-        // In the case that the window could not be made...
-        printf("Could not create window: %s\n", SDL_GetError());
+    if (!window) {
         return 1;
     }
 
-    renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+    bool appIsRunning = true;
 
-    if (renderer == NULL) {
+    SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+
+    if (renderer == nullptr) {
         // In the case that the renderer could not be made...
         printf("Could not create renderer: %s\n", SDL_GetError());
         return 1;
     }
+
+    int numMillisToThrottle = 6;
+    Uint64 lastDrawTime = SDL_GetTicks64();
 
     //main game/app loop
     while (appIsRunning) {
