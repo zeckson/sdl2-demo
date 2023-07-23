@@ -1,3 +1,9 @@
+# Build file
+build
+
+# Intellij Idea project
+.idea
+
 # Prerequisites
 *.d
 
