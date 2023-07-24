@@ -3,6 +3,7 @@
 //
 
 #include <SDL.h>
+#include <SDL_events.h>
 #include "Game.h"
 #include "window.h"
 
@@ -29,44 +30,34 @@ void Game::doInput() {
 
         // Handle each specific event
         if (event.type == SDL_KEYDOWN) {
-            if (event.key.keysym.scancode == SDL_SCANCODE_UP) {
-                upArrowDown = true;
-            } else if (event.key.keysym.scancode == SDL_SCANCODE_LEFT) {
-                leftArrowDown = true;
-            } else if (event.key.keysym.scancode == SDL_SCANCODE_DOWN) {
-                downArrowDown = true;
-            } else if (event.key.keysym.scancode == SDL_SCANCODE_RIGHT) {
-                rightArrowDown = true;
-            }
-        } else if (event.type == SDL_KEYUP) {
-            if (event.key.keysym.scancode == SDL_SCANCODE_UP) {
-                upArrowDown = false;
-            } else if (event.key.keysym.scancode == SDL_SCANCODE_LEFT) {
-                leftArrowDown = false;
-            } else if (event.key.keysym.scancode == SDL_SCANCODE_DOWN) {
-                downArrowDown = false;
-            } else if (event.key.keysym.scancode == SDL_SCANCODE_RIGHT) {
-                rightArrowDown = false;
-            }
+            onKeyDown(&event.key);
         }
     }
 }
+
+void Game::onKeyDown(SDL_KeyboardEvent *event) {
+    if (event->keysym.scancode == SDL_SCANCODE_ESCAPE) {
+        isRunning = false;
+    }
+};
 
 void Game::update() {
 
     int numPixelsToMovePerFrame = player.w / 4;
 
+    const Uint8 *state = SDL_GetKeyboardState(nullptr);
+
     //move player
-    if (upArrowDown) {
+    if (state[SDL_SCANCODE_UP]) {
         player.y -= numPixelsToMovePerFrame;
     }
-    if (leftArrowDown) {
-        player.x -= numPixelsToMovePerFrame;
-    }
-    if (downArrowDown) {
+    if (state[SDL_SCANCODE_DOWN]) {
         player.y += numPixelsToMovePerFrame;
     }
-    if (rightArrowDown) {
+    if (state[SDL_SCANCODE_LEFT]) {
+        player.x -= numPixelsToMovePerFrame;
+    }
+    if (state[SDL_SCANCODE_RIGHT]) {
         player.x += numPixelsToMovePerFrame;
     }
 

@@ -6,6 +6,7 @@
 #define SDL2_DEMO_GAME_H
 
 #include <SDL_render.h>
+#include <SDL_events.h>
 #include "window.h"
 
 class Game {
@@ -21,11 +22,6 @@ private:
     window::App *app;
     SDL_Rect player;
 
-    bool upArrowDown = false;
-    bool leftArrowDown = false;
-    bool downArrowDown = false;
-    bool rightArrowDown = false;
-
     bool isRunning = true;
 
     void doInput();
@@ -34,6 +30,8 @@ private:
     void update();
 
     void render();
+
+    void onKeyDown(SDL_KeyboardEvent *event);
 };
 
 
