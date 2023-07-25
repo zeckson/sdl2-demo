@@ -26,7 +26,6 @@ private:
 
     void doInput();
 
-
     void update();
 
     void render();
