@@ -7,19 +7,6 @@
 #include "Game.h"
 #include "window.h"
 
-void Game::init() {
-    app = window::init(title, SCREEN_WIDTH, SCREEN_HEIGHT);
-
-    int w = app->width;
-    int h = app->height;
-
-    player.w = w / 30;
-    player.h = h / 10;
-    player.x = w / 2 - player.w / 2;
-    player.y = h / 2 - player.h / 2;
-}
-
-
 void Game::doInput() {
     SDL_Event event;
     while (SDL_PollEvent(&event)) {
@@ -43,34 +30,20 @@ void Game::onKeyDown(SDL_KeyboardEvent *event) {
 
 void Game::update() {
 
-    int numPixelsToMovePerFrame = player.w / 4;
-
-    const Uint8 *state = SDL_GetKeyboardState(nullptr);
-
-    //move player
-    if (state[SDL_SCANCODE_UP]) {
-        player.y -= numPixelsToMovePerFrame;
-    }
-    if (state[SDL_SCANCODE_DOWN]) {
-        player.y += numPixelsToMovePerFrame;
-    }
-    if (state[SDL_SCANCODE_LEFT]) {
-        player.x -= numPixelsToMovePerFrame;
-    }
-    if (state[SDL_SCANCODE_RIGHT]) {
-        player.x += numPixelsToMovePerFrame;
-    }
+    player.update();
 
     //bounds checking and correction
-    if (player.x < 0) {
-        player.x = 0;
-    } else if (player.x + player.w - 1 >= app->width) {
-        player.x = app->width - player.w;
+    auto rect = player.rect;
+
+    if (rect.x < 0) {
+        rect.x = 0;
+    } else if (rect.x + rect.w - 1 >= app->width) {
+        rect.x = app->width - rect.w;
     }
-    if (player.y < 0) {
-        player.y = 0;
-    } else if (player.y + player.h - 1 >= app->height) {
-        player.y = app->height - player.h;
+    if (rect.y < 0) {
+        rect.y = 0;
+    } else if (rect.y + rect.h - 1 >= app->height) {
+        rect.y = app->height - rect.h;
     }
 }
 
@@ -81,7 +54,7 @@ void Game::render() {
     SDL_RenderClear(renderer);
 
     SDL_SetRenderDrawColor(renderer, 255, 105, 180, SDL_ALPHA_OPAQUE);
-    SDL_RenderFillRect(renderer, &player);
+    SDL_RenderFillRect(renderer, &player.rect);
     SDL_RenderPresent(renderer);
 
     SDL_Delay(RENDER_DELAY);

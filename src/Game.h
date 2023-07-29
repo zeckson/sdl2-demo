@@ -8,19 +8,19 @@
 #include <SDL_render.h>
 #include <SDL_events.h>
 #include "window.h"
+#include "Player.h"
 
 class Game {
 public:
-    Game(const char* title): title(title) {};
+    explicit Game(window::App *app) : app(app), player(app->width / 2, app->height / 2) {};
 
-    void init();
     void exit();
 
     bool run();
+
 private:
-    const char* title;
     window::App *app;
-    SDL_Rect player;
+    Player player;
 
     bool isRunning = true;
 

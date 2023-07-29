@@ -5,18 +5,14 @@
 #ifndef SDL2_DEMO_ENTITY_H
 #define SDL2_DEMO_ENTITY_H
 
-
-#include <SDL_render.h>
-
-class Entity{
+class Entity {
 public:
-    Entity(int x, int y): x(x), y(y) {};
-    Entity(SDL_Texture *texture, int x, int y): x(x), y(y), texture(texture)  {};
-    int x, y;
+    Entity(short width, short height, int x, int y) :
+            rect{x, y, width, height} {};
 
-    SDL_Texture *texture{};
+    SDL_Rect rect;
 
-    virtual void update();
+    virtual void update() = 0;
 };
 
 
