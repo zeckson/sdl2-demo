@@ -5,6 +5,18 @@
 #ifndef SDL2_DEMO_ENTITY_H
 #define SDL2_DEMO_ENTITY_H
 
+#include <list>
+
+template<class T>
+struct World {
+    World(int width, int height) : width(width), height(height) {};
+
+    int width;
+    int height;
+
+    std::list<T> entities{};
+};
+
 class Entity {
 public:
     Entity(short width, short height, int x, int y) :
@@ -12,7 +24,7 @@ public:
 
     SDL_Rect rect;
 
-    virtual void update() = 0;
+    virtual void update(World<Entity *> *world) = 0;
 };
 
 

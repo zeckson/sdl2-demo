@@ -12,7 +12,11 @@
 
 class Game {
 public:
-    explicit Game(window::App *app) : app(app), player(app->width / 2, app->height / 2) {};
+    explicit Game(window::App *app) : app(app),
+                                      world(app->width, app->height),
+                                      player(app->width / 2, app->height / 2) {
+        world.entities.push_back(&player);
+    };
 
     void exit();
 
@@ -20,6 +24,7 @@ public:
 
 private:
     window::App *app;
+    World<Entity*> world;
     Player player;
 
     bool isRunning = true;

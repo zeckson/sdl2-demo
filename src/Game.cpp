@@ -30,20 +30,8 @@ void Game::onKeyDown(SDL_KeyboardEvent *event) {
 
 void Game::update() {
 
-    player.update();
-
-    //bounds checking and correction
-    auto rect = player.rect;
-
-    if (rect.x < 0) {
-        rect.x = 0;
-    } else if (rect.x + rect.w - 1 >= app->width) {
-        rect.x = app->width - rect.w;
-    }
-    if (rect.y < 0) {
-        rect.y = 0;
-    } else if (rect.y + rect.h - 1 >= app->height) {
-        rect.y = app->height - rect.h;
+    for (const auto entity: world.entities) {
+        entity->update(&world);
     }
 }
 
@@ -70,5 +58,3 @@ bool Game::run() {
 void Game::exit() {
     window::cleanup(app);
 }
-
-

@@ -16,7 +16,7 @@ public:
     explicit Player(int x, int y) :
             Entity(PLAYER_WIDTH, PLAYER_HEIGHT, x - PLAYER_WIDTH / 2, y - PLAYER_HEIGHT / 2) {};
 
-    void update() override;
+    void update(World<Entity*> *world) override;
 
 };
 
