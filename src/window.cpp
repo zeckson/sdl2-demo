@@ -3,8 +3,20 @@
 //
 
 #include "SDL.h"
+#include "SDL_image.h"
 #include <iostream>
 #include "window.h"
+
+SDL_Texture *loadTexture(SDL_Renderer *renderer, const char *filename)
+{
+    SDL_Texture *texture;
+
+    SDL_LogMessage(SDL_LOG_CATEGORY_APPLICATION, SDL_LOG_PRIORITY_INFO, "Loading %s", filename);
+
+    texture = IMG_LoadTexture(renderer, filename);
+
+    return texture;
+}
 
 window::App *window::init(const char *title, int width, int height) {
     if (SDL_Init(SDL_INIT_VIDEO) < 0) {
@@ -40,7 +52,11 @@ window::App *window::init(const char *title, int width, int height) {
         exit(1);
     }
 
-    static window::App app = {sdlWindow, sdlRenderer, width, height};
+    // Loading textures
+    // Init img support
+    IMG_Init(IMG_INIT_PNG | IMG_INIT_JPG);
+
+    static window::App app = {sdlWindow, sdlRenderer, width, height, loadTexture(sdlRenderer, PLAYER_TEXTURE_PATH)};
 
     return &app;
 }

@@ -17,6 +17,7 @@ public:
             Entity(PLAYER_WIDTH, PLAYER_HEIGHT, x - PLAYER_WIDTH / 2, y - PLAYER_HEIGHT / 2) {};
 
     void update(World<Entity*> *world) override;
+    void render(SDL_Renderer *sdlRenderer) override;
 
 };
 

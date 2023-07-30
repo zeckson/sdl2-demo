@@ -37,3 +37,9 @@ void Player::update(World<Entity*> *world) {
     }
 
 }
+
+void Player::render(SDL_Renderer *sdlRenderer) {
+    SDL_SetRenderDrawColor(sdlRenderer, 255, 105, 180, SDL_ALPHA_OPAQUE);
+    SDL_RenderFillRect(sdlRenderer, &rect);
+    SDL_RenderPresent(sdlRenderer);
+}

@@ -14,11 +14,14 @@ namespace window {
 
         int width;
         int height;
+
+        SDL_Texture *player;
     } App;
 
     App *init(const char *title, int width = SCREEN_WIDTH, int height = SCREEN_HEIGHT);
 
     void cleanup(App *app);
+
 }
 
 #endif //SDL2_DEMO_WINDOW_H

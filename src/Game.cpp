@@ -41,9 +41,9 @@ void Game::render() {
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE);
     SDL_RenderClear(renderer);
 
-    SDL_SetRenderDrawColor(renderer, 255, 105, 180, SDL_ALPHA_OPAQUE);
-    SDL_RenderFillRect(renderer, &player.rect);
-    SDL_RenderPresent(renderer);
+    for (const auto entity: world.entities) {
+        entity->render(renderer);
+    }
 
     SDL_Delay(RENDER_DELAY);
 }

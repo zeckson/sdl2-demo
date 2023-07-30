@@ -6,6 +6,7 @@
 #define SDL2_DEMO_ENTITY_H
 
 #include <list>
+#include <SDL_render.h>
 
 template<class T>
 struct World {
@@ -25,6 +26,7 @@ public:
     SDL_Rect rect;
 
     virtual void update(World<Entity *> *world) = 0;
+    virtual void render(SDL_Renderer *sdlRenderer) = 0;
 };
 
 
