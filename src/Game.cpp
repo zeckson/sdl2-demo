@@ -38,7 +38,7 @@ void Game::update() {
 void Game::render() {
     SDL_Renderer *renderer = app->renderer;
 
-    SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE);
+    SDL_SetRenderDrawColor(renderer, 0, 122, 0, SDL_ALPHA_OPAQUE);
     SDL_RenderClear(renderer);
 
     for (const auto entity: world.entities) {

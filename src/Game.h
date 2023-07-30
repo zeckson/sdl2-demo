@@ -14,7 +14,7 @@ class Game {
 public:
     explicit Game(window::App *app) : app(app),
                                       world(app->width, app->height),
-                                      player(app->width / 2, app->height / 2) {
+                                      player(app->player, app->width / 2, app->height / 2) {
         world.entities.push_back(&player);
     };
 
