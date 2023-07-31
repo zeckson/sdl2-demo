@@ -6,6 +6,7 @@
 #define SDL2_DEMO_WINDOW_H
 
 #include "defs.h"
+#include "SDL_image.h"
 
 namespace window {
     typedef struct {
@@ -14,14 +15,13 @@ namespace window {
 
         int width;
         int height;
-
-        SDL_Texture *player;
     } App;
 
     App *init(const char *title, int width = SCREEN_WIDTH, int height = SCREEN_HEIGHT);
 
     void cleanup(App *app);
 
+    SDL_Texture *loadTexture(SDL_Renderer *renderer, const char *filename);
 }
 
 #endif //SDL2_DEMO_WINDOW_H

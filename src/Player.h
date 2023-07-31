@@ -7,14 +7,11 @@
 
 #include "Entity.h"
 
-#define PLAYER_WIDTH 100
-#define PLAYER_HEIGHT 102
-
 
 class Player : public Entity {
 public:
     explicit Player(SDL_Texture *texture, int x, int y) :
-            Entity(texture, x - PLAYER_WIDTH / 2, y - PLAYER_HEIGHT / 2) {};
+            Entity(texture, x, y) {};
 
     void update(World<Entity*> *world) override;
 };

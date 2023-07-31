@@ -8,14 +8,16 @@
 #include <SDL_render.h>
 #include <SDL_events.h>
 #include "window.h"
+#include "World.h"
+#include "EntityFactory.h"
 #include "Player.h"
 
 class Game {
 public:
     explicit Game(window::App *app) : app(app),
-                                      world(app->width, app->height),
-                                      player(app->player, app->width / 2, app->height / 2) {
-        world.entities.push_back(&player);
+                                      world(app),
+                                      factory(app) {
+        world.entities.push_back(factory.createPlayer());
     };
 
     void exit();
@@ -25,7 +27,7 @@ public:
 private:
     window::App *app;
     World<Entity*> world;
-    Player player;
+    EntityFactory factory;
 
     bool isRunning = true;
 

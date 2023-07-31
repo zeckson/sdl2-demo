@@ -10,9 +10,11 @@
 #define RENDER_DELAY   16
 
 #define PLAYER_TEXTURE_PATH "gfx/spaceship.png"
+#define FIREBALL_TEXTURE_PATH "gfx/fireball.png"
 
 enum Texture {
-    PLAYER = 0
+    PLAYER = 0,
+    FIREBALL = 1
 };
 
 #endif //SDL2_DEMO_DEFS_H

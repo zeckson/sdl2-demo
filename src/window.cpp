@@ -7,7 +7,7 @@
 #include <iostream>
 #include "window.h"
 
-SDL_Texture *loadTexture(SDL_Renderer *renderer, const char *filename)
+SDL_Texture *window::loadTexture(SDL_Renderer *renderer, const char *filename)
 {
     SDL_Texture *texture;
 
@@ -56,7 +56,7 @@ window::App *window::init(const char *title, int width, int height) {
     // Init img support
     IMG_Init(IMG_INIT_PNG | IMG_INIT_JPG);
 
-    static window::App app = {sdlWindow, sdlRenderer, width, height, loadTexture(sdlRenderer, PLAYER_TEXTURE_PATH)};
+    static window::App app = {sdlWindow, sdlRenderer, width, height};
 
     return &app;
 }
