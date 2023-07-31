@@ -35,11 +35,9 @@ void Player::update(World<Entity*> *world) {
     } else if (rect.y + rect.h - 1 >= world->height) {
         rect.y = world->height - rect.h;
     }
+//
+//    if (state[SDL_SCANCODE_SPACE]) {
+//        world->entities.push_back()
+//    }
 
-}
-
-void Player::render(SDL_Renderer *sdlRenderer) {
-    SDL_SetRenderDrawColor(sdlRenderer, 255, 105, 180, SDL_ALPHA_OPAQUE);
-    SDL_RenderCopy(sdlRenderer, texture, nullptr, &rect);
-    SDL_RenderPresent(sdlRenderer);
 }

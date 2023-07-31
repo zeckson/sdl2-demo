@@ -20,13 +20,15 @@ struct World {
 
 class Entity {
 public:
-    Entity(short width, short height, int x, int y) :
-            rect{x, y, width, height} {};
+    Entity(SDL_Texture *texture, int x, int y): texture(texture), rect{x, y, 0, 0} {
+        SDL_QueryTexture(texture, nullptr, nullptr, &rect.w, &rect.h);
+    };
 
+    SDL_Texture *texture;
     SDL_Rect rect;
 
     virtual void update(World<Entity *> *world) = 0;
-    virtual void render(SDL_Renderer *sdlRenderer) = 0;
+    void render(SDL_Renderer *sdlRenderer);
 };
 
 

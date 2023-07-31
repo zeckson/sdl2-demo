@@ -14,13 +14,9 @@
 class Player : public Entity {
 public:
     explicit Player(SDL_Texture *texture, int x, int y) :
-            Entity(PLAYER_WIDTH, PLAYER_HEIGHT, x - PLAYER_WIDTH / 2, y - PLAYER_HEIGHT / 2), texture(texture) {};
+            Entity(texture, x - PLAYER_WIDTH / 2, y - PLAYER_HEIGHT / 2) {};
 
     void update(World<Entity*> *world) override;
-    void render(SDL_Renderer *sdlRenderer) override;
-
-private:
-    SDL_Texture *texture;
 };
 
 
