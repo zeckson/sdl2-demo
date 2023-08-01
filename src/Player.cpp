@@ -4,6 +4,7 @@
 
 #include <SDL_keyboard.h>
 #include "Player.h"
+#include "Fireball.h"
 
 void Player::update(World<Entity*> *world) {
     int numPixelsToMovePerFrame = rect.w / 4;
@@ -35,9 +36,10 @@ void Player::update(World<Entity*> *world) {
     } else if (rect.y + rect.h - 1 >= world->height) {
         rect.y = world->height - rect.h;
     }
-//
-//    if (state[SDL_SCANCODE_SPACE]) {
-//        world->entities.push_back()
-//    }
+
+    if (state[SDL_SCANCODE_SPACE]) {
+        Fireball *pFireball = world->factory->createFireball(rect.x, rect.y);
+        world->entities.push_back(pFireball);
+    }
 
 }

@@ -3,6 +3,8 @@
 //
 
 #include "EntityFactory.h"
+#include "Player.h"
+#include "Fireball.h"
 
 Player *EntityFactory::createPlayer() {
     return new Player(textures[Texture::PLAYER], app->width/2, app->height/2);

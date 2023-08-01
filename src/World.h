@@ -8,16 +8,18 @@
 #include <list>
 #include "SDL.h"
 #include "window.h"
+#include "EntityFactory.h"
 
 template<class T>
 class World {
 public:
-    World(window::App *app) : width(app->width), height(app->height) {};
+    explicit World(window::App *app) : width(app->width), height(app->height), factory(new EntityFactory(app)) {};
 
     int width;
     int height;
 
     std::list<T> entities{};
+    EntityFactory *factory;
 };
 
 #endif //SDL2_DEMO_WORLD_H

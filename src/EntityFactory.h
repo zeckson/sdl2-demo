@@ -7,8 +7,10 @@
 
 #include "window.h"
 #include "SDL.h"
-#include "Player.h"
-#include "Fireball.h"
+
+// Forward declaration
+class Player;
+class Fireball;
 
 class EntityFactory {
 public:
