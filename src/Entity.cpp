@@ -6,5 +6,4 @@
 
 void Entity::render(SDL_Renderer *sdlRenderer) {
     SDL_RenderCopy(sdlRenderer, texture, nullptr, &rect);
-    SDL_RenderPresent(sdlRenderer);
 }
