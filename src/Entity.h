@@ -22,6 +22,10 @@ public:
     virtual void update(World<Entity *> *world) = 0;
 
     void render(SDL_Renderer *sdlRenderer);
+
+    virtual void onKeyDown(const SDL_Keysym &key) {};
+
+    virtual void onKeyUp(const SDL_Keysym &key) {};
 };
 
 

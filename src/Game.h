@@ -36,8 +36,6 @@ private:
     void update();
 
     void render();
-
-    void onKeyDown(SDL_KeyboardEvent *event);
 };
 
 
