@@ -29,6 +29,8 @@ private:
     World<Entity*> world;
     EntityFactory factory;
 
+    SDL_Scancode lastKeyDown = SDL_SCANCODE_UNKNOWN;
+
     bool isRunning = true;
 
     void doInput();

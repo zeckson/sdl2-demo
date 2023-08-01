@@ -19,6 +19,11 @@ void Game::doInput() {
         if (event.type == SDL_KEYDOWN) {
             SDL_Keysym &keysym = event.key.keysym;
 
+            if (lastKeyDown == keysym.scancode) {
+                break;
+            }
+            lastKeyDown = keysym.scancode;
+
             SDL_LogMessage(SDL_LOG_CATEGORY_APPLICATION, SDL_LOG_PRIORITY_INFO,
                            "Keydown code: %u", keysym.scancode);
             if (keysym.scancode == SDL_SCANCODE_ESCAPE) {
@@ -29,6 +34,8 @@ void Game::doInput() {
             }
         }
         if (event.type == SDL_KEYUP) {
+            lastKeyDown = SDL_SCANCODE_UNKNOWN;
+
             SDL_LogMessage(SDL_LOG_CATEGORY_APPLICATION, SDL_LOG_PRIORITY_INFO,
                            "Keyup code: %u", event.key.keysym.scancode);
             for (const auto entity: world.entities) {
