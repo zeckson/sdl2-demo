@@ -6,7 +6,7 @@
 #include "Player.h"
 #include "Fireball.h"
 
-void Player::update(World<Entity*> *world) {
+void Player::update(World<Entity *> *world) {
     //move rect
     rect.y += yVel;
     rect.x += xVel;
@@ -25,7 +25,7 @@ void Player::update(World<Entity*> *world) {
 
     if (fire) {
         fire = false;
-        Fireball *pFireball = world->factory->createFireball(rect.x, rect.y);
+        Fireball *pFireball = world->factory->createFireball(rect.x + rect.w / 2, rect.y);
         world->entities.push_back(pFireball);
     }
 
