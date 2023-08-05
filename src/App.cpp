@@ -1,24 +1,14 @@
 //
-// Created by Evgenii Shchepotev on 23.07.2023.
+// Created by Evgenii Shchepotev on 04.08.2023.
 //
 
+#include "App.h"
 #include "SDL.h"
 #include "SDL_image.h"
 #include <iostream>
-#include "window.h"
+#include "defs.h"
 
-SDL_Texture *window::loadTexture(SDL_Renderer *renderer, const char *filename)
-{
-    SDL_Texture *texture;
-
-    SDL_LogMessage(SDL_LOG_CATEGORY_APPLICATION, SDL_LOG_PRIORITY_INFO, "Loading %s", filename);
-
-    texture = IMG_LoadTexture(renderer, filename);
-
-    return texture;
-}
-
-window::App *window::init(const char *title, int width, int height) {
+App &App::init(const char *title, const int width, const int height) {
     if (SDL_Init(SDL_INIT_VIDEO) < 0) {
         std::cout << "SDL could not be initialized: " << SDL_GetError();
     } else {
@@ -56,14 +46,30 @@ window::App *window::init(const char *title, int width, int height) {
     // Init img support
     IMG_Init(IMG_INIT_PNG | IMG_INIT_JPG);
 
-    static window::App app = {sdlWindow, sdlRenderer, width, height};
-
-    return &app;
+    return *(new App(*sdlWindow, *sdlRenderer, width, height));
 }
 
-void window::cleanup(App *app) {
-    SDL_DestroyWindow(app->window);
-    SDL_DestroyRenderer(app->renderer);
+void cleanup(App &app) {
+    SDL_DestroyWindow(const_cast<SDL_Window *>(&app.window));
+    SDL_DestroyRenderer(const_cast<SDL_Renderer *>(&app.renderer));
     std::cout << "exiting..." << std::endl;
     SDL_Quit();
-};
+}
+
+App::~App() {
+    cleanup(*this);
+}
+
+SDL_Texture &App::loadTexture(const char *filename) {
+    SDL_Texture *texture;
+
+    SDL_LogMessage(SDL_LOG_CATEGORY_APPLICATION, SDL_LOG_PRIORITY_INFO, "Loading %s", filename);
+
+    texture = IMG_LoadTexture(const_cast<SDL_Renderer *>(&this->renderer), filename);
+
+    if (!texture) {
+        printf("Failed to load texture [%s] renderer: %s\n", filename, SDL_GetError());
+    }
+
+    return *texture;
+}

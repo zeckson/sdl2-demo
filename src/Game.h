@@ -7,16 +7,13 @@
 
 #include <SDL_render.h>
 #include <SDL_events.h>
-#include "window.h"
 #include "World.h"
 #include "EntityFactory.h"
 #include "Player.h"
 
 class Game {
 public:
-    explicit Game(window::App *app) : app(app),
-                                      world(app),
-                                      factory(app) {
+    explicit Game(App &app) : app(app), world(app), factory(app) {
         world.entities.push_back(factory.createPlayer());
     };
 
@@ -25,8 +22,8 @@ public:
     bool run();
 
 private:
-    window::App *app;
-    World<Entity*> world;
+    App &app;
+    World<Entity *> world;
     EntityFactory factory;
 
     SDL_Scancode lastKeyDown = SDL_SCANCODE_UNKNOWN;

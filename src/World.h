@@ -7,13 +7,12 @@
 
 #include <list>
 #include "SDL.h"
-#include "window.h"
 #include "EntityFactory.h"
 
 template<class T>
 class World {
 public:
-    explicit World(window::App *app) : width(app->width), height(app->height), factory(new EntityFactory(app)) {};
+    explicit World(App &app) : width(app.width), height(app.height), factory(new EntityFactory(app)) {};
 
     int width;
     int height;

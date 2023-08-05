@@ -5,7 +5,6 @@
 #include <SDL.h>
 #include <SDL_events.h>
 #include "Game.h"
-#include "window.h"
 
 void Game::doInput() {
     SDL_Event event;
@@ -53,7 +52,7 @@ void Game::update() {
 }
 
 void Game::render() {
-    SDL_Renderer *renderer = app->renderer;
+    auto *renderer = const_cast<SDL_Renderer*>(&app.renderer);
 
     SDL_SetRenderDrawColor(renderer, 0, 122, 0, SDL_ALPHA_OPAQUE);
     SDL_RenderClear(renderer);
@@ -75,5 +74,5 @@ bool Game::run() {
 }
 
 void Game::exit() {
-    window::cleanup(app);
+    delete &app;
 }
