@@ -48,7 +48,7 @@ void Game::update() {
     std::list<Entity*> removed;
     auto &entities = world.entities;
     for (const auto entity: entities) {
-        if (entity->update(&world)) {
+        if (entity->update(world)) {
             removed.push_back(entity);
         }
     }

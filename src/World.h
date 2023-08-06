@@ -12,13 +12,13 @@
 template<class T>
 class World {
 public:
-    explicit World(App &app) : width(app.width), height(app.height), factory(new EntityFactory(app)) {};
+    explicit World(App &app) : width(app.width), height(app.height), factory(*(new EntityFactory(app))) {};
 
     int width;
     int height;
 
     std::list<T> entities{};
-    EntityFactory *factory;
+    EntityFactory &factory;
 };
 
 #endif //SDL2_DEMO_WORLD_H

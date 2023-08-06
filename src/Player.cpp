@@ -6,7 +6,7 @@
 #include "Player.h"
 #include "Fireball.h"
 
-bool Player::update(World<Entity *> *world) {
+bool Player::update(World<Entity *> &world) {
     //move rect
     rect.y += yVel;
     rect.x += xVel;
@@ -14,19 +14,19 @@ bool Player::update(World<Entity *> *world) {
     //bounds checking and correction
     if (rect.x < 0) {
         rect.x = 0;
-    } else if (rect.x + rect.w - 1 >= world->width) {
-        rect.x = world->width - rect.w;
+    } else if (rect.x + rect.w - 1 >= world.width) {
+        rect.x = world.width - rect.w;
     }
     if (rect.y < 0) {
         rect.y = 0;
-    } else if (rect.y + rect.h - 1 >= world->height) {
-        rect.y = world->height - rect.h;
+    } else if (rect.y + rect.h - 1 >= world.height) {
+        rect.y = world.height - rect.h;
     }
 
     if (fire) {
         fire = false;
-        Fireball *pFireball = world->factory->createFireball(rect.x + rect.w / 2, rect.y);
-        world->entities.push_back(pFireball);
+        Fireball *pFireball = world.factory.createFireball(rect.x + rect.w / 2, rect.y);
+        world.entities.push_back(pFireball);
     }
 
     return false;

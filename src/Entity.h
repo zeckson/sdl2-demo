@@ -10,18 +10,18 @@
 
 class Entity {
 public:
-    Entity(SDL_Texture *texture, int x, int y) : texture(texture), rect{x, y, 0, 0} {
-        SDL_QueryTexture(texture, nullptr, nullptr, &rect.w, &rect.h);
+    Entity(SDL_Texture &texture, int x, int y) : texture(texture), rect{x, y, 0, 0} {
+        SDL_QueryTexture(&texture, nullptr, nullptr, &rect.w, &rect.h);
         rect.x = rect.x - rect.w / 2;
         rect.y = rect.y - rect.h / 2;
     };
 
-    ~Entity() = default;
+    virtual ~Entity() = default;
 
-    SDL_Texture *texture;
+    SDL_Texture &texture;
     SDL_Rect rect;
 
-    virtual bool update(World<Entity *> *world) = 0;
+    virtual bool update(World<Entity *> &world) = 0;
 
     void render(SDL_Renderer *sdlRenderer);
 

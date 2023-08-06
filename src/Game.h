@@ -13,8 +13,8 @@
 
 class Game {
 public:
-    explicit Game(App &app) : app(app), world(app), factory(app) {
-        world.entities.push_back(factory.createPlayer());
+    explicit Game(App &app) : app(app), world(app) {
+        world.entities.push_back(world.factory.createPlayer());
     };
 
     void exit();
@@ -24,7 +24,6 @@ public:
 private:
     App &app;
     World<Entity *> world;
-    EntityFactory factory;
 
     SDL_Scancode lastKeyDown = SDL_SCANCODE_UNKNOWN;
 
