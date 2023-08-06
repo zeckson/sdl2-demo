@@ -6,7 +6,7 @@
 #include "Player.h"
 #include "Fireball.h"
 
-void Player::update(World<Entity *> *world) {
+bool Player::update(World<Entity *> *world) {
     //move rect
     rect.y += yVel;
     rect.x += xVel;
@@ -29,6 +29,7 @@ void Player::update(World<Entity *> *world) {
         world->entities.push_back(pFireball);
     }
 
+    return false;
 }
 
 void Player::onKeyDown(const SDL_Keysym &key) {

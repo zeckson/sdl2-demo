@@ -45,9 +45,16 @@ void Game::doInput() {
 }
 
 void Game::update() {
-
-    for (const auto entity: world.entities) {
-        entity->update(&world);
+    std::list<Entity*> removed;
+    auto &entities = world.entities;
+    for (const auto entity: entities) {
+        if (entity->update(&world)) {
+            removed.push_back(entity);
+        }
+    }
+    for (const auto entity: removed) {
+        entities.remove(entity);
+        delete entity;
     }
 }
 

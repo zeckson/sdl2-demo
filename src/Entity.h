@@ -16,10 +16,12 @@ public:
         rect.y = rect.y - rect.h / 2;
     };
 
+    ~Entity() = default;
+
     SDL_Texture *texture;
     SDL_Rect rect;
 
-    virtual void update(World<Entity *> *world) = 0;
+    virtual bool update(World<Entity *> *world) = 0;
 
     void render(SDL_Renderer *sdlRenderer);
 
