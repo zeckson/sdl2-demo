@@ -24,9 +24,9 @@ bool Player::update(World<Entity *> &world) {
     }
 
     if (fire) {
-        fire = false;
         Fireball *pFireball = world.factory.createFireball(rect.x + rect.w / 2, rect.y);
         world.entities.push_back(pFireball);
+        fire = false;
     }
 
     return false;
