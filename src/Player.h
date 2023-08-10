@@ -16,7 +16,7 @@ public:
 
     void onKeyUp(const SDL_Keysym &key) override;
 
-    bool update(World<Entity *> &world) override;
+    bool update(World &world) override;
 
 private:
     int xVel = 0, yVel = 0;

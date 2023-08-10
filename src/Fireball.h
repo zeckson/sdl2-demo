@@ -12,7 +12,7 @@ class Fireball: public Entity {
 public:
     explicit Fireball(SDL_Texture &texture, int x, int y): Entity(texture, x, y) {}
 
-    bool update(World<Entity *> &world) override;
+    bool update(World &world) override;
 };
 
 

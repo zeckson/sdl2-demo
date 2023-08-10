@@ -9,28 +9,26 @@
 #include "SDL.h"
 #include "EntityFactory.h"
 
-template<class T>
+class Entity;
+
 class World {
 public:
     explicit World(App &app) : width(app.width), height(app.height), factory(*(new EntityFactory(app))) {
-        player = factory.createPlayer();
+        player = reinterpret_cast<Entity *>(factory.createPlayer());
         entities.push_back(player);
     };
 
-    T getPlayer();
+    Entity* getPlayer() {
+        return player;
+    };
 
     int width;
     int height;
 
-    std::list<T> entities{};
+    std::list<Entity*> entities{};
     EntityFactory &factory;
 private:
-    T player;
+    Entity* player;
 };
-
-template<class T>
-T World<T>::getPlayer() {
-    return player;
-}
 
 #endif //SDL2_DEMO_WORLD_H

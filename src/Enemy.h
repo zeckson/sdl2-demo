@@ -15,7 +15,7 @@ public:
 
     ~Enemy() override = default;
 
-    bool update(World<Entity *> &world) override;
+    bool update(World &world) override;
 
     void onKeyDown(const SDL_Keysym &key) override;
 

@@ -4,7 +4,7 @@
 
 #include "Enemy.h"
 
-bool Enemy::update(World<Entity *> &world) {
+bool Enemy::update(World &world) {
     return false;
 }
 

@@ -21,7 +21,7 @@ public:
 
 private:
     App &app;
-    World<Entity *> world;
+    World world;
 
     SDL_Scancode lastKeyDown = SDL_SCANCODE_UNKNOWN;
 

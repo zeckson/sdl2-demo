@@ -21,7 +21,7 @@ public:
     SDL_Texture &texture;
     SDL_Rect rect;
 
-    virtual bool update(World<Entity *> &world) = 0;
+    virtual bool update(World &world) = 0;
 
     void render(SDL_Renderer *sdlRenderer);
 

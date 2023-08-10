@@ -6,7 +6,7 @@
 #include "Player.h"
 #include "Fireball.h"
 
-bool Player::update(World<Entity *> &world) {
+bool Player::update(World &world) {
     //move rect
     rect.y += yVel;
     rect.x += xVel;

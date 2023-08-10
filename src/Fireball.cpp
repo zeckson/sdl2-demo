@@ -4,7 +4,7 @@
 
 #include "Fireball.h"
 
-bool Fireball::update(World<Entity *> &world) {
+bool Fireball::update(World &world) {
     int velocity = rect.h;
 
     rect.y -= velocity;
