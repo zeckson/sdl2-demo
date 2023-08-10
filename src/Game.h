@@ -13,9 +13,7 @@
 
 class Game {
 public:
-    explicit Game(App &app) : app(app), world(app) {
-        world.entities.push_back(world.factory.createPlayer());
-    };
+    explicit Game(App &app) : app(app), world(app) {};
 
     void exit();
 
