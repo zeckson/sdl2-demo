@@ -24,6 +24,8 @@ public:
 private:
     explicit App(SDL_Window &window, SDL_Renderer &renderer, int width, int height) :
             window(window), renderer(renderer), width(width), height(height) {};
+
+    static SDL_Surface* loadSurface(const char *filename);
 };
 
 

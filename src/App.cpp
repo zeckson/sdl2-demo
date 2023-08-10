@@ -60,14 +60,24 @@ App::~App() {
     cleanup(*this);
 }
 
+SDL_Surface* App::loadSurface(const char *filename) {
+    SDL_LogMessage(SDL_LOG_CATEGORY_APPLICATION, SDL_LOG_PRIORITY_INFO, "Loading surface %s", filename);
+
+    SDL_Surface *pSurface = IMG_Load(filename);
+
+    if (!pSurface) {
+        printf("Failed to load surface [%s] renderer: %s\n", filename, SDL_GetError());
+    }
+
+    return pSurface;
+}
+
 SDL_Texture &App::loadTexture(const char *filename) {
-    SDL_Texture *texture;
+    SDL_Surface *pSurface = loadSurface(filename);
 
-    SDL_LogMessage(SDL_LOG_CATEGORY_APPLICATION, SDL_LOG_PRIORITY_INFO, "Loading %s", filename);
+    SDL_Texture *texture = SDL_CreateTextureFromSurface(&this->renderer, pSurface);
 
-    SDL_Surface *const pSurface = IMG_Load(filename);
-
-    texture = SDL_CreateTextureFromSurface(&this->renderer, pSurface);
+    SDL_FreeSurface(pSurface); // why surface wasn't allocated?
 
     if (!texture) {
         printf("Failed to load texture [%s] renderer: %s\n", filename, SDL_GetError());

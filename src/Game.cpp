@@ -44,6 +44,10 @@ void Game::doInput() {
     }
 }
 
+Enemy* spawnEnemy() {
+    return nullptr;
+}
+
 void Game::update() {
     std::list<Entity*> removed;
     auto &entities = world.entities;
