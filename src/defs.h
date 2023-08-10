@@ -8,6 +8,9 @@
 #define SCREEN_WIDTH   1280
 #define SCREEN_HEIGHT  720
 #define RENDER_DELAY   16 // 1000 / 60 FPS = 16,6667 ms per one frame
+
+#define PLAYER_SPEED   25 // Player width / 4 = 25
+
 #define PLAYER_TEXTURE_PATH "gfx/spaceship.png"
 #define FIREBALL_TEXTURE_PATH "gfx/fireball.png"
 

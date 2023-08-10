@@ -7,7 +7,6 @@
 
 #include "Entity.h"
 
-
 class Player : public Entity {
 public:
     explicit Player(SDL_Texture &texture, int x, int y) :
@@ -18,6 +17,7 @@ public:
     void onKeyUp(const SDL_Keysym &key) override;
 
     bool update(World<Entity *> &world) override;
+
 private:
     int xVel = 0, yVel = 0;
     bool fire = false;

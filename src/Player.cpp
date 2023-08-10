@@ -34,7 +34,7 @@ bool Player::update(World<Entity *> &world) {
 
 void Player::onKeyDown(const SDL_Keysym &key) {
     Entity::onKeyDown(key);
-    int speed = rect.w / 4;
+    int speed = PLAYER_SPEED;
 
     switch (key.scancode) {
         case SDL_SCANCODE_UP:

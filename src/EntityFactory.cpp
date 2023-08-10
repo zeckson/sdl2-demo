@@ -5,6 +5,7 @@
 #include "EntityFactory.h"
 #include "Player.h"
 #include "Fireball.h"
+#include "Enemy.h"
 
 Player *EntityFactory::createPlayer() {
     return new Player(*textures[Texture::PLAYER], app.width/2, app.height/2);
@@ -12,4 +13,8 @@ Player *EntityFactory::createPlayer() {
 
 Fireball *EntityFactory::createFireball(int x, int y) {
     return new Fireball(*textures[Texture::FIREBALL], x, y);
+}
+
+Enemy *EntityFactory::createEnemy(int x, int y) {
+    return new Enemy(*textures[Texture::PLAYER], x, y);
 }

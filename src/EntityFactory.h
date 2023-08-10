@@ -14,6 +14,8 @@ class Player;
 
 class Fireball;
 
+class Enemy;
+
 class EntityFactory {
 public:
     EntityFactory(App &app) : app(app) {
@@ -29,6 +31,8 @@ private:
     App &app;
 
     SDL_Texture *textures[2];
+
+    Enemy *createEnemy(int x, int y);
 };
 
 
