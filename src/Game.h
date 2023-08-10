@@ -13,7 +13,7 @@
 
 class Game {
 public:
-    explicit Game(App &app) : app(app), world(app) {};
+    explicit Game(App &app);;
 
     void exit();
 

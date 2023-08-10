@@ -27,6 +27,9 @@ public:
 
     std::list<Entity*> entities{};
     EntityFactory &factory;
+
+    void update();
+
 private:
     Entity* player;
 };

@@ -44,26 +44,12 @@ void Game::doInput() {
     }
 }
 
-Enemy* spawnEnemy() {
-    return nullptr;
-}
-
 void Game::update() {
-    std::list<Entity*> removed;
-    auto &entities = world.entities;
-    for (const auto entity: entities) {
-        if (entity->update(world)) {
-            removed.push_back(entity);
-        }
-    }
-    for (const auto entity: removed) {
-        entities.remove(entity);
-        delete entity;
-    }
+    world.update();
 }
 
 void Game::render() {
-    auto *renderer = const_cast<SDL_Renderer*>(&app.renderer);
+    auto *renderer = const_cast<SDL_Renderer *>(&app.renderer);
 
     SDL_SetRenderDrawColor(renderer, 0, 122, 0, SDL_ALPHA_OPAQUE);
     SDL_RenderClear(renderer);
@@ -86,4 +72,14 @@ bool Game::run() {
 
 void Game::exit() {
     delete &app;
+}
+
+Game::Game(App &app) : app(app), world(app) {
+    int rnd = std::rand();
+    int maxEnemies = app.width / PLAYER_WIDTH;
+
+    int x = rnd % maxEnemies;
+    Entity *pEnemy = reinterpret_cast<Entity *>(world.factory.createEnemy(x * PLAYER_WIDTH + PLAYER_WIDTH / 2,
+                                                                          PLAYER_HEIGHT / 2));
+    world.entities.push_back(pEnemy);
 }

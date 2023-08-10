@@ -27,12 +27,12 @@ public:
 
     Fireball *createFireball(int x, int y);
 
+    Enemy *createEnemy(int x, int y);
 private:
     App &app;
 
     SDL_Texture *textures[2];
 
-    Enemy *createEnemy(int x, int y);
 };
 
 
