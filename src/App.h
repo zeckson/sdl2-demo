@@ -12,17 +12,17 @@ class App {
 public:
     virtual ~App();
 
-    const SDL_Window &window;
-    const SDL_Renderer &renderer;
+    SDL_Window &window;
+    SDL_Renderer &renderer;
 
     int width;
     int height;
 
     SDL_Texture &loadTexture(const char *filename);
 
-    static App& init(const char *title, const int width, const int height);
+    static App& init(const char *title, int width, int height);
 private:
-    App(const SDL_Window &window, const SDL_Renderer &renderer, int width, int height) :
+    explicit App(SDL_Window &window, SDL_Renderer &renderer, int width, int height) :
             window(window), renderer(renderer), width(width), height(height) {};
 };
 

@@ -50,8 +50,8 @@ App &App::init(const char *title, const int width, const int height) {
 }
 
 void cleanup(App &app) {
-    SDL_DestroyWindow(const_cast<SDL_Window *>(&app.window));
-    SDL_DestroyRenderer(const_cast<SDL_Renderer *>(&app.renderer));
+    SDL_DestroyWindow(&app.window);
+    SDL_DestroyRenderer(&app.renderer);
     std::cout << "exiting..." << std::endl;
     SDL_Quit();
 }
@@ -65,7 +65,9 @@ SDL_Texture &App::loadTexture(const char *filename) {
 
     SDL_LogMessage(SDL_LOG_CATEGORY_APPLICATION, SDL_LOG_PRIORITY_INFO, "Loading %s", filename);
 
-    texture = IMG_LoadTexture(const_cast<SDL_Renderer *>(&this->renderer), filename);
+    SDL_Surface *const pSurface = IMG_Load(filename);
+
+    texture = SDL_CreateTextureFromSurface(&this->renderer, pSurface);
 
     if (!texture) {
         printf("Failed to load texture [%s] renderer: %s\n", filename, SDL_GetError());
