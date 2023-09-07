@@ -7,7 +7,7 @@
 
 #include <list>
 #include "SDL.h"
-#include "EntityFactory.h"
+#include "entity/EntityFactory.h"
 
 class Entity;
 

@@ -8,8 +8,6 @@
 #include <SDL_render.h>
 #include <SDL_events.h>
 #include "World.h"
-#include "EntityFactory.h"
-#include "Player.h"
 
 class Game {
 public:

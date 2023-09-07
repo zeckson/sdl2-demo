@@ -6,8 +6,8 @@
 #define SDL2_DEMO_ENTITYFACTORY_H
 
 #include "SDL.h"
-#include "App.h"
-#include "defs.h"
+#include "../App.h"
+#include "../defs.h"
 
 // Forward declaration
 class Player;
@@ -18,7 +18,7 @@ class Enemy;
 
 class EntityFactory {
 public:
-    EntityFactory(App &app) : app(app) {
+    explicit EntityFactory(App &app) : app(app) {
         textures[Texture::PLAYER] = &app.loadTexture(PLAYER_TEXTURE_PATH);
         textures[Texture::FIREBALL] = &app.loadTexture(FIREBALL_TEXTURE_PATH);
     };
@@ -28,10 +28,11 @@ public:
     Fireball *createFireball(int x, int y);
 
     Enemy *createEnemy(int x, int y);
+
 private:
     App &app;
 
-    SDL_Texture *textures[2];
+    SDL_Texture *textures[2]{};
 
 };
 

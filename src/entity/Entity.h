@@ -5,7 +5,7 @@
 #ifndef SDL2_DEMO_ENTITY_H
 #define SDL2_DEMO_ENTITY_H
 
-#include "World.h"
+#include "../World.h"
 #include <SDL_render.h>
 
 class Entity {

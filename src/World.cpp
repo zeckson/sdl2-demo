@@ -2,7 +2,7 @@
 // Created by Evgenii Shchepotev on 10.08.2023.
 //
 #include "World.h"
-#include "Entity.h"
+#include "entity/Entity.h"
 
 void World::update() {
     std::list<Entity*> removed;
