@@ -1,11 +1,11 @@
 SRC_DIR = src
 BUILD_DIR = build
 CC = g++
-SRC_FILES = $(wildcard $(SRC_DIR)/*.cpp)
+SRC_FILES = $(wildcard $(SRC_DIR)/*.cpp) $(wildcard $(SRC_DIR)/**/*.cpp)
 OBJ_NAME = SDL_App
 SDL_LIBRARY_INCLUDE = $(shell sdl2-config --cflags)
 SDL_LIBRARY = $(shell pkg-config SDL2 SDL2_image --libs)
-COMPILER_FLAGS = -std=c++17 -Wall -O0 -g
+COMPILER_FLAGS = -std=c++17 -Wall -O0 -g -mmacosx-version-min=13.0
 
 .PHONY: compile clean run all
 
