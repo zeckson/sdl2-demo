@@ -8,7 +8,6 @@ void World::update() {
     int rnd = std::rand();
     int maxEnemies = this->width / PLAYER_WIDTH;
 
-
     if (this->enemies.size() < maxEnemies && (rnd % 10 == 0)) {
 
         int x = rnd % maxEnemies * PLAYER_WIDTH + PLAYER_WIDTH / 2;

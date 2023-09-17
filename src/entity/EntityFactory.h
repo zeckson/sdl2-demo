@@ -20,6 +20,7 @@ class EntityFactory {
 public:
     explicit EntityFactory(App &app) : app(app) {
         textures[Texture::PLAYER] = &app.loadTexture(PLAYER_TEXTURE_PATH);
+        textures[Texture::ENEMY] = &app.loadTexture(ENEMY_TEXTURE_PATH);
         textures[Texture::FIREBALL] = &app.loadTexture(FIREBALL_TEXTURE_PATH);
     };
 
@@ -32,7 +33,7 @@ public:
 private:
     App &app;
 
-    SDL_Texture *textures[2]{};
+    SDL_Texture *textures[3]{};
 
 };
 

@@ -16,5 +16,5 @@ Fireball *EntityFactory::createFireball(int x, int y) {
 }
 
 Enemy *EntityFactory::createEnemy(int x, int y) {
-    return new Enemy(*textures[Texture::PLAYER], x, y);
+    return new Enemy(*textures[Texture::ENEMY], x, y);
 }
