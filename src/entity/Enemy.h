@@ -5,7 +5,7 @@
 #ifndef SDL2_DEMO_ENEMY_H
 #define SDL2_DEMO_ENEMY_H
 
-#define ENEMY_SPEED (PLAYER_SPEED / 2)
+#define ENEMY_SPEED (PLAYER_SPEED / 3)
 
 #include "Entity.h"
 
