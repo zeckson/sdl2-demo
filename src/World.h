@@ -26,6 +26,7 @@ public:
     int height;
 
     std::list<Entity*> entities{};
+    std::list<Entity*> enemies{};
     EntityFactory &factory;
 
     void update();

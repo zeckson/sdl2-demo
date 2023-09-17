@@ -8,7 +8,7 @@
 #include "EntityFactory.h"
 
 Player *EntityFactory::createPlayer() {
-    return new Player(*textures[Texture::PLAYER], app.width/2, app.height/2);
+    return new Player(*textures[Texture::PLAYER], app.width/2, app.height);
 }
 
 Fireball *EntityFactory::createFireball(int x, int y) {

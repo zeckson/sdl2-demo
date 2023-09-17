@@ -6,7 +6,6 @@
 #include <SDL_events.h>
 #include "Game.h"
 #include "entity/Entity.h"
-#include "entity/EntityFactory.h"
 
 void Game::doInput() {
     SDL_Event event;
@@ -77,11 +76,4 @@ void Game::exit() {
 }
 
 Game::Game(App &app) : app(app), world(app) {
-    int rnd = std::rand();
-    int maxEnemies = app.width / PLAYER_WIDTH;
-
-    int x = rnd % maxEnemies;
-    auto *pEnemy = reinterpret_cast<Entity *>(world.factory.createEnemy(x * PLAYER_WIDTH + PLAYER_WIDTH / 2,
-                                                                          PLAYER_HEIGHT / 2));
-    world.entities.push_back(pEnemy);
 }
