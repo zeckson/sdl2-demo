@@ -9,5 +9,12 @@ bool Fireball::update(World &world) {
 
     rect.y -= velocity;
 
+    for (const auto enemy: world.enemies) {
+        if (SDL_HasIntersection(&enemy->rect, &this->rect)) {
+            enemy->state = State::DEAD;
+        }
+    }
+
+
     return rect.y + rect.h < 0;
 }

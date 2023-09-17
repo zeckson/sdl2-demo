@@ -78,8 +78,6 @@ bool Game::run() {
     SDL_LogMessage(SDL_LOG_CATEGORY_APPLICATION, SDL_LOG_PRIORITY_VERBOSE,
                    "Update time %lld ms", duration.count());
 
-
-
     return isRunning;
 }
 

@@ -26,11 +26,17 @@ void World::update() {
     auto &myEntities = this->entities;
     for (const auto entity: myEntities) {
         if (entity->update(*this)) {
+            entity->state = State::DEAD;
+        }
+    }
+    for (const auto entity: myEntities) {
+        if (entity->state == State::DEAD) {
             removed.push_back(entity);
         }
     }
     for (const auto entity: removed) {
-        myEntities.remove(entity);
+        this->entities.remove(entity);
+        this->enemies.remove(entity);
         delete entity;
     }
 

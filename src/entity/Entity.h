@@ -8,6 +8,10 @@
 #include "../World.h"
 #include <SDL_render.h>
 
+enum class State {
+    ALIVE, DEAD
+};
+
 class Entity {
 public:
     Entity(SDL_Texture &texture, int x, int y) : texture(texture), rect{x, y, 0, 0} {
@@ -20,6 +24,7 @@ public:
 
     SDL_Texture &texture;
     SDL_Rect rect;
+    State state = State::ALIVE;
 
     virtual bool update(World &world) = 0;
 
