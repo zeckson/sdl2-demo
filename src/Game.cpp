@@ -47,6 +47,10 @@ void Game::doInput() {
 
 void Game::update() {
     world.update();
+
+    if (world.getPlayer()->state == State::DEAD) {
+        isRunning = false;
+    }
 }
 
 void Game::render() {

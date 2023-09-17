@@ -22,7 +22,7 @@ public:
     void onKeyUp(const SDL_Keysym &key) override;
 
 private:
-    int xVel = 0, yVel = ENEMY_SPEED;
+    int yVel = ENEMY_SPEED;
 };
 
 

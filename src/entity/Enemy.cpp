@@ -5,7 +5,16 @@
 #include "Enemy.h"
 
 bool Enemy::update(World &world) {
-    return false;
+    int velocity = yVel;
+
+    rect.y += velocity;
+
+    Entity *player = world.getPlayer();
+    if (SDL_HasIntersection(&player->rect, &this->rect)) {
+        player->state = State::DEAD;
+    }
+
+    return rect.y > world.height;
 }
 
 void Enemy::onKeyDown(const SDL_Keysym &key) {
