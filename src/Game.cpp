@@ -69,18 +69,18 @@ void Game::render() {
 }
 
 bool Game::run() {
-    const auto start = std::chrono::steady_clock::now();
+    const auto start = SDL_GetTicks64();
 
     doInput();
     update();
     render();
 
-    const auto end = std::chrono::steady_clock::now();
+    const auto end = SDL_GetTicks64();
 
-    const auto duration = std::chrono::duration_cast<std::chrono::milliseconds >(end - start);
+    const auto duration = end - start;
 
     SDL_LogMessage(SDL_LOG_CATEGORY_APPLICATION, SDL_LOG_PRIORITY_VERBOSE,
-                   "Update time %lld ms", duration.count());
+                   "Update time %lldms", duration);
 
     return isRunning;
 }
