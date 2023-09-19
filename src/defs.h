@@ -7,7 +7,8 @@
 
 #define SCREEN_WIDTH   1280
 #define SCREEN_HEIGHT  720
-#define RENDER_DELAY   16 // 1000 / 60 FPS = 16,6667 ms per one frame
+#define FPS            60
+#define RENDER_DELAY   (1000 / FPS) // 1000 / 60 FPS = 16,6667 ms per one frame
 
 #define PLAYER_WIDTH   100
 #define PLAYER_HEIGHT  100

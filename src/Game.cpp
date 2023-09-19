@@ -64,8 +64,6 @@ void Game::render() {
     }
 
     SDL_RenderPresent(renderer);
-
-    SDL_Delay(RENDER_DELAY);
 }
 
 bool Game::run() {
@@ -77,10 +75,19 @@ bool Game::run() {
 
     const auto end = SDL_GetTicks64();
 
-    const auto duration = end - start;
+    const Uint32 duration = end - start;
 
-    SDL_LogMessage(SDL_LOG_CATEGORY_APPLICATION, SDL_LOG_PRIORITY_VERBOSE,
-                   "Update time %lldms", duration);
+    int delay = RENDER_DELAY - duration;
+    delay = delay > 0 ? delay : 1;
+
+    double fps = 1000 / (double) (duration + delay);
+    SDL_LogMessage(SDL_LOG_CATEGORY_APPLICATION, SDL_LOG_PRIORITY_DEBUG,
+                   "Current fps: %.2f", fps);
+
+    SDL_LogMessage(SDL_LOG_CATEGORY_APPLICATION, SDL_LOG_PRIORITY_DEBUG,
+                   "Update delay: %dms", delay);
+
+    SDL_Delay(delay);
 
     return isRunning;
 }
