@@ -75,17 +75,17 @@ bool Game::run() {
 
     const auto end = SDL_GetTicks64();
 
-    const Uint32 duration = end - start;
+    const auto duration = static_cast<Sint64>(end - start);
 
-    int delay = RENDER_DELAY - duration;
+    Sint64 delay = RENDER_DELAY - duration;
     delay = delay > 0 ? delay : 1;
 
-    double fps = 1000 / (double) (duration + delay);
+    const auto fps = 1000 / static_cast<double>(duration + delay);
     SDL_LogMessage(SDL_LOG_CATEGORY_APPLICATION, SDL_LOG_PRIORITY_DEBUG,
                    "Current fps: %.2f", fps);
 
     SDL_LogMessage(SDL_LOG_CATEGORY_APPLICATION, SDL_LOG_PRIORITY_DEBUG,
-                   "Update delay: %dms", delay);
+                   "Update delay: %lldms", delay);
 
     SDL_Delay(delay);
 
