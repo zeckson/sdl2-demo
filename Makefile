@@ -4,7 +4,10 @@ CC = g++
 SRC_FILES = $(wildcard $(SRC_DIR)/*.cpp) $(wildcard $(SRC_DIR)/**/*.cpp)
 OBJ_NAME = SDL_App
 SDL_LIBRARY_INCLUDE = $(shell sdl2-config --cflags)
-SDL_LIBRARY = $(shell pkg-config SDL2 SDL2_image --libs)
+SDL_CORE_LIBRARY = $(shell pkg-config SDL2 --libs)
+SDL_IMAGE_LIBRARY = $(shell pkg-config SDL2_image --libs)
+SDL_TTF_LIBRARY = $(shell pkg-config SDL2_ttf --libs)
+SDL_LIBRARY = $(SDL_CORE_LIBRARY) $(SDL_IMAGE_LIBRARY) $(SDL_TTF_LIBRARY)
 COMPILER_FLAGS = -std=c++17 -Wall -O0 -g -mmacosx-version-min=13.0
 
 .PHONY: compile clean run all
