@@ -11,7 +11,7 @@
 
 class Game {
 public:
-    explicit Game(App &app);;
+    explicit Game(App &app);
 
     void exit();
 
