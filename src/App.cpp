@@ -5,8 +5,19 @@
 #include "App.h"
 #include "SDL.h"
 #include "SDL_image.h"
+#include "SDL_ttf.h"
 #include <iostream>
 #include "defs.h"
+
+void ttfInit() {
+    /* Initialize the TTF library */
+    if (TTF_Init() < 0) {
+        SDL_Log("Couldn't initialize TTF: %s\n", SDL_GetError());
+        SDL_Quit();
+        exit(2);
+    }
+}
+
 
 App &App::init(const char *title, const int width, const int height) {
     if (SDL_Init(SDL_INIT_VIDEO) < 0) {
@@ -46,8 +57,11 @@ App &App::init(const char *title, const int width, const int height) {
     // Init img support
     IMG_Init(IMG_INIT_PNG | IMG_INIT_JPG);
 
+    ttfInit();
+
     return *(new App(*sdlWindow, *sdlRenderer, width, height));
 }
+
 
 void cleanup(App &app) {
     SDL_DestroyWindow(&app.window);
@@ -60,7 +74,7 @@ App::~App() {
     cleanup(*this);
 }
 
-SDL_Surface* App::loadSurface(const char *filename) {
+SDL_Surface *App::loadSurface(const char *filename) {
     SDL_LogMessage(SDL_LOG_CATEGORY_APPLICATION, SDL_LOG_PRIORITY_INFO, "Loading surface %s", filename);
 
     SDL_Surface *pSurface = IMG_Load(filename);
