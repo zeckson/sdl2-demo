@@ -63,8 +63,27 @@ void Game::render() {
         entity->render(renderer);
     }
 
+    frameRate.render(app);
+
     SDL_RenderPresent(renderer);
 }
+
+void FrameRate::render(App &app) {
+    frameCount++;
+    Uint32 currentTime = SDL_GetTicks();
+    if (currentTime - startTime >= 1000) {
+        fps = frameCount / ((currentTime - startTime) / 1000.0);
+
+        // Reset frame rate counters
+        startTime = currentTime;
+        frameCount = 0;
+    }
+
+    // Render frame rate on the screen
+    std::string fpsText = "FPS: " + std::to_string(static_cast<int>(fps));
+    app.fontRenderer->renderText(fpsText, 10, 10);
+}
+
 
 bool Game::run() {
     const auto start = SDL_GetTicks64();
@@ -80,12 +99,7 @@ bool Game::run() {
     Sint64 delay = RENDER_DELAY - duration;
     delay = delay > 0 ? delay : 1;
 
-    const auto fps = 1000 / static_cast<double>(duration + delay);
-    SDL_LogMessage(SDL_LOG_CATEGORY_APPLICATION, SDL_LOG_PRIORITY_DEBUG,
-                   "Current fps: %.2f", fps);
-
-    SDL_LogMessage(SDL_LOG_CATEGORY_APPLICATION, SDL_LOG_PRIORITY_DEBUG,
-                   "Update delay: %lldms", delay);
+    SDL_LogDebug(SDL_LOG_CATEGORY_APPLICATION, "Update delay: %lldms", delay);
 
     SDL_Delay(delay);
 

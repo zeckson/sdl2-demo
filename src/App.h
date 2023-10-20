@@ -31,11 +31,4 @@ private:
 
 };
 
-struct FrameRate {
-    int frameCount = 0;
-    int startTime = SDL_GetTicks();
-    void render(App &app);
-};
-
-
 #endif //SDL2_DEMO_APP_H

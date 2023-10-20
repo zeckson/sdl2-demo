@@ -2,9 +2,9 @@
 // Created by Evgenii Shchepotev on 20.10.2023.
 //
 
-#include "FontRenderer.h"
 #include "SDL.h"
 #include "SDL_ttf.h"
+#include "FontRenderer.h"
 #include <string>
 
 FontRenderer::FontRenderer(SDL_Renderer& renderer) {

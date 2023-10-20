@@ -17,7 +17,7 @@
 #define PLAYER_TEXTURE_PATH     "gfx/spaceship.png"
 #define ENEMY_TEXTURE_PATH      "gfx/enemy.png"
 #define FIREBALL_TEXTURE_PATH   "gfx/fireball.png"
-#define FONT_PATH               "/Users/zeckson/develop/sdl2-demo/gfx/cyberglitch.ttf"
+#define FONT_PATH               "/Users/zeckson/develop/sdl2-demo/gfx/glitchgoblin.ttf"
 #define DEFAULT_FONT_SIZE       24
 
 enum Texture {

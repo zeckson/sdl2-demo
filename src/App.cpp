@@ -94,19 +94,3 @@ App::App(SDL_Window &window, SDL_Renderer &renderer, int width, int height) :
         window(window), renderer(renderer), width(width), height(height) {
     fontRenderer = new FontRenderer(renderer);
 }
-
-void FrameRate::render(App &app) {
-    frameCount++;
-    Uint32 currentTime = SDL_GetTicks();
-    if (currentTime - startTime >= 1000) {
-        double fps = frameCount / ((currentTime - startTime) / 1000.0);
-        std::string fpsText = "FPS: " + std::to_string(static_cast<int>(fps));
-
-        // Render frame rate on the screen
-        app.fontRenderer->renderText(fpsText, 10, 10);
-
-        // Reset frame rate counters
-        startTime = currentTime;
-        frameCount = 0;
-    }
-}
