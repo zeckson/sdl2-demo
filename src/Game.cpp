@@ -19,33 +19,15 @@ void Game::doInput() {
             isRunning = false;
         }
 
-        // Handle each specific event
         if (event.type == SDL_KEYDOWN) {
-            SDL_Keysym &keysym = event.key.keysym;
+            // TODO: switch menu/engine state
 
-            if (lastKeyDown == keysym.scancode) {
-                break;
-            }
-            lastKeyDown = keysym.scancode;
-
-            SDL_LogMessage(SDL_LOG_CATEGORY_APPLICATION, SDL_LOG_PRIORITY_INFO,
-                           "Keydown code: %u", keysym.scancode);
-            if (keysym.scancode == SDL_SCANCODE_ESCAPE) {
+            if (event.key.keysym.scancode == SDL_SCANCODE_ESCAPE) {
                 isRunning = false;
             }
-            for (const auto entity: world.entities) {
-                entity->onKeyDown(keysym);
-            }
         }
-        if (event.type == SDL_KEYUP) {
-            lastKeyDown = SDL_SCANCODE_UNKNOWN;
 
-            SDL_LogMessage(SDL_LOG_CATEGORY_APPLICATION, SDL_LOG_PRIORITY_INFO,
-                           "Keyup code: %u", event.key.keysym.scancode);
-            for (const auto entity: world.entities) {
-                entity->onKeyUp(event.key.keysym);
-            }
-        }
+        world.handleEvent(event);
     }
 }
 
@@ -63,9 +45,7 @@ void Game::render() {
     SDL_SetRenderDrawColor(renderer, 0, 122, 0, SDL_ALPHA_OPAQUE);
     SDL_RenderClear(renderer);
 
-    for (const auto entity: world.entities) {
-        entity->render(renderer);
-    }
+    world.render(renderer);
 
     frameRate.render(app);
 

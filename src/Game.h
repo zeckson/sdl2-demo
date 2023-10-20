@@ -29,8 +29,6 @@ private:
     App &app;
     World world;
 
-    SDL_Scancode lastKeyDown = SDL_SCANCODE_UNKNOWN;
-
     bool isRunning = true;
 
     FrameRate frameRate;

@@ -41,3 +41,37 @@ void World::update() {
 
 }
 
+void World::handleEvent(const SDL_Event &event) {
+    // Handle each specific event
+    if (event.type == SDL_KEYDOWN) {
+        const SDL_Keysym &keysym = event.key.keysym;
+
+        if (lastKeyDown == keysym.scancode) {
+            return;
+        }
+        lastKeyDown = keysym.scancode;
+
+        SDL_LogMessage(SDL_LOG_CATEGORY_APPLICATION, SDL_LOG_PRIORITY_INFO,
+                       "Keydown code: %u", keysym.scancode);
+
+        for (const auto entity: entities) {
+            entity->onKeyDown(keysym);
+        }
+    }
+    if (event.type == SDL_KEYUP) {
+        lastKeyDown = SDL_SCANCODE_UNKNOWN;
+
+        SDL_LogMessage(SDL_LOG_CATEGORY_APPLICATION, SDL_LOG_PRIORITY_INFO,
+                       "Keyup code: %u", event.key.keysym.scancode);
+        for (const auto entity: entities) {
+            entity->onKeyUp(event.key.keysym);
+        }
+    }
+}
+
+void World::render(SDL_Renderer *pRenderer) {
+    for (const auto entity: entities) {
+        entity->render(pRenderer);
+    }
+}
+

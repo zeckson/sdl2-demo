@@ -31,8 +31,13 @@ public:
 
     void update();
 
+    void handleEvent(const SDL_Event &event);
+
+    void render(SDL_Renderer *pRenderer);
+
 private:
     Entity* player;
+    SDL_Scancode lastKeyDown = SDL_SCANCODE_UNKNOWN;
 };
 
 #endif //SDL2_DEMO_WORLD_H
