@@ -6,6 +6,10 @@
 #include <SDL_events.h>
 #include "Game.h"
 #include "entity/Entity.h"
+#include <iostream>
+#include <iomanip>
+#include <string>
+#include <sstream>
 
 void Game::doInput() {
     SDL_Event event;
@@ -80,7 +84,10 @@ void FrameRate::render(const App &app) {
     }
 
     // Render frame rate on the screen
-    std::string fpsText = "FPS: " + std::to_string(static_cast<int>(fps));
+    std::stringstream formatted;
+    formatted << "FPS: " << std::fixed << std::setprecision(2) << fps;
+
+    std::string fpsText = formatted.str();
     app.fontRenderer->renderText(fpsText, 10, 10);
 }
 

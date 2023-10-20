@@ -34,7 +34,7 @@ FontRenderer::~FontRenderer() {
 
 void FontRenderer::renderText(const std::string &text, int x, int y) {
     SDL_Color color = {255, 255, 255}; // White text color
-    SDL_Surface* surface = TTF_RenderText_Solid(this->font, text.c_str(), color);
+    SDL_Surface* surface = renderSolidText(text.c_str(), color);
     SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, surface);
     SDL_Rect textRect = {x, y, surface->w, surface->h};
 
@@ -42,4 +42,8 @@ void FontRenderer::renderText(const std::string &text, int x, int y) {
 
     SDL_FreeSurface(surface);
     SDL_DestroyTexture(texture);
+}
+
+SDL_Surface *FontRenderer::renderSolidText(const char *string, SDL_Color color) {
+    return TTF_RenderText_Solid(this->font, string, color);
 }

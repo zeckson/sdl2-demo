@@ -18,6 +18,8 @@ public:
 
     void renderText(const std::string& text, int x, int y);
 
+    SDL_Surface *renderSolidText(const char *string, SDL_Color color);
+
 private:
     SDL_Renderer* renderer{};
     TTF_Font* font;
