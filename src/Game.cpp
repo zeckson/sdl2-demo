@@ -68,7 +68,7 @@ void Game::render() {
     SDL_RenderPresent(renderer);
 }
 
-void FrameRate::render(App &app) {
+void FrameRate::render(const App &app) {
     frameCount++;
     Uint32 currentTime = SDL_GetTicks();
     if (currentTime - startTime >= 1000) {

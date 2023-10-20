@@ -14,7 +14,7 @@ struct FrameRate {
     int startTime = SDL_GetTicks();
     double fps;
 
-    void render(App &app);
+    void render(const App &app);
 };
 
 class Game {
