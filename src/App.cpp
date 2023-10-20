@@ -5,18 +5,9 @@
 #include "App.h"
 #include "SDL.h"
 #include "SDL_image.h"
-#include "SDL_ttf.h"
 #include <iostream>
 #include "defs.h"
-
-void ttfInit() {
-    /* Initialize the TTF library */
-    if (TTF_Init() < 0) {
-        SDL_Log("Couldn't initialize TTF: %s\n", SDL_GetError());
-        SDL_Quit();
-        exit(2);
-    }
-}
+#include "FontRenderer.h"
 
 
 App &App::init(const char *title, const int width, const int height) {
@@ -56,10 +47,9 @@ App &App::init(const char *title, const int width, const int height) {
     // Loading textures
     // Init img support
     IMG_Init(IMG_INIT_PNG | IMG_INIT_JPG);
+    const auto pApp = new App(*sdlWindow, *sdlRenderer, width, height);
 
-    ttfInit();
-
-    return *(new App(*sdlWindow, *sdlRenderer, width, height));
+    return *pApp;
 }
 
 
@@ -98,4 +88,25 @@ SDL_Texture &App::loadTexture(const char *filename) {
     }
 
     return *texture;
+}
+
+App::App(SDL_Window &window, SDL_Renderer &renderer, int width, int height) :
+        window(window), renderer(renderer), width(width), height(height) {
+    fontRenderer = new FontRenderer(renderer);
+}
+
+void FrameRate::render(App &app) {
+    frameCount++;
+    Uint32 currentTime = SDL_GetTicks();
+    if (currentTime - startTime >= 1000) {
+        double fps = frameCount / ((currentTime - startTime) / 1000.0);
+        std::string fpsText = "FPS: " + std::to_string(static_cast<int>(fps));
+
+        // Render frame rate on the screen
+        app.fontRenderer->renderText(fpsText, 10, 10);
+
+        // Reset frame rate counters
+        startTime = currentTime;
+        frameCount = 0;
+    }
 }
