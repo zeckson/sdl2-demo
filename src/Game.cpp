@@ -88,7 +88,8 @@ bool Game::run() {
 
     SDL_LogDebug(SDL_LOG_CATEGORY_APPLICATION, "Update delay: %lldms", delay);
 
-    SDL_Delay(delay);
+    // BC! We use vertical sync in render options
+    //    SDL_Delay(delay);
 
     return isRunning;
 }

@@ -11,6 +11,8 @@
 
 
 App &App::init(const char *title, const int width, const int height) {
+    SDL_LogSetAllPriority( SDL_LOG_PRIORITY_WARN );
+
     if (SDL_Init(SDL_INIT_VIDEO) < 0) {
         std::cout << "SDL could not be initialized: " << SDL_GetError();
     } else {
