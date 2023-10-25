@@ -35,7 +35,7 @@ void Game::update() {
     world.update();
 
     if (world.getPlayer()->state == State::DEAD) {
-        isRunning = false;
+        isRunning = DEMO_MODE;
     }
 }
 
