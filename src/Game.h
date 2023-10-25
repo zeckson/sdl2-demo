@@ -11,8 +11,8 @@
 
 struct FrameRate {
     int frameCount = 0;
-    int startTime = SDL_GetTicks();
-    double fps;
+    Uint32 startTime = SDL_GetTicks();
+    double fps = 0.0;
 
     void render(const App &app);
 };
