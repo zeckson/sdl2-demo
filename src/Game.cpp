@@ -11,7 +11,7 @@
 #include <string>
 #include <sstream>
 
-void Game::doInput() {
+void Game::input() {
     SDL_Event event;
     while (SDL_PollEvent(&event)) {
 
@@ -75,7 +75,7 @@ void FrameRate::render(const App &app) {
 bool Game::run() {
     const auto start = SDL_GetTicks64();
 
-    doInput();
+    input();
     update();
     render();
 

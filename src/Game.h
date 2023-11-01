@@ -33,7 +33,7 @@ private:
 
     FrameRate frameRate;
 
-    void doInput();
+    void input();
 
     void update();
 
