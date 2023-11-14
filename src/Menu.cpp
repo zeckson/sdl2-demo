@@ -3,7 +3,7 @@
 
 Menu::Menu(App *app, const std::vector<std::string>& items): app_(app), menuItems_(items), selectedItem_(0) {}
 
-void Menu::Render() {
+void Menu::render() {
     auto renderer_ = &app_->renderer;
 
     // Clear the screen
@@ -36,7 +36,7 @@ void Menu::Render() {
     SDL_RenderPresent(renderer_);
 }
 
-void Menu::HandleEvent(const SDL_Event& event) {
+void Menu::handleEvent(const SDL_Event& event) {
     if (event.type == SDL_KEYDOWN) {
         switch (event.key.keysym.sym) {
             case SDLK_UP:
@@ -47,13 +47,13 @@ void Menu::HandleEvent(const SDL_Event& event) {
                 break;
             case SDLK_RETURN:
             case SDLK_SPACE:
-                PerformAction();
+                performAction();
                 break;
         }
     }
 }
 
-void Menu::PerformAction() {
+void Menu::performAction() {
     if (selectedItem_ == 0) {
         // Start Game
         std::cout << "Starting the game..." << std::endl;
@@ -61,7 +61,7 @@ void Menu::PerformAction() {
         // Options
         std::cout << "Entering options menu..." << std::endl;
     } else if (selectedItem_ == 2) {
-        // Quit
+        // quit
         quit_ = true;
     }
 }

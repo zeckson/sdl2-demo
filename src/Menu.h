@@ -10,11 +10,11 @@
 class Menu {
 public:
     Menu(App* app, const std::vector<std::string>& items);
-    void Render();
-    void HandleEvent(const SDL_Event& event);
-    void PerformAction();
-    bool Quit() const { return quit_; }
-    void SetQuit(bool quit) { quit_ = quit; }
+    void render();
+    void handleEvent(const SDL_Event& event);
+    void performAction();
+    bool quit() const { return quit_; }
+    void setQuit(bool quit) { quit_ = quit; }
 
 private:
     App* app_;
