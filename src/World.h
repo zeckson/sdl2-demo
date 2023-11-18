@@ -8,10 +8,11 @@
 #include <list>
 #include "SDL.h"
 #include "entity/EntityFactory.h"
+#include "Action.h"
 
 class Entity;
 
-class World {
+class World: public Subject {
 public:
     explicit World(App &app) : width(app.width), height(app.height), factory(*(new EntityFactory(app))) {
         player = reinterpret_cast<Entity *>(factory.createPlayer());

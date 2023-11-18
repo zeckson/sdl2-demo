@@ -1,14 +1,10 @@
 #include "Menu.h"
 #include "App.h"
 
-Menu::Menu(App *app, const std::vector<std::string>& items): app_(app), menuItems_(items), selectedItem_(0) {}
+Menu::Menu(App *app): app_(app), menuItems_(*(new std::vector<std::string>({"Restart/Continue", "Quit"}))), selectedItem_(0) {}
 
-void Menu::render() {
-    auto renderer_ = &app_->renderer;
-
-    // Clear the screen
-    SDL_SetRenderDrawColor(renderer_, 0, 0, 0, 255);
-    SDL_RenderClear(renderer_);
+void Menu::render(SDL_Renderer* pRenderer) {
+    auto renderer_ = pRenderer;
 
     for (int i = 0; i < menuItems_.size(); i++) {
         if (i == selectedItem_) {
@@ -32,8 +28,6 @@ void Menu::render() {
         SDL_RenderCopy(renderer_, textTexture, nullptr, &textRect);
         SDL_DestroyTexture(textTexture);
     }
-
-    SDL_RenderPresent(renderer_);
 }
 
 void Menu::handleEvent(const SDL_Event& event) {
@@ -55,13 +49,8 @@ void Menu::handleEvent(const SDL_Event& event) {
 
 void Menu::performAction() {
     if (selectedItem_ == 0) {
-        // Start Game
-        std::cout << "Starting the game..." << std::endl;
+        this->notify(Action::RESTART);
     } else if (selectedItem_ == 1) {
-        // Options
-        std::cout << "Entering options menu..." << std::endl;
-    } else if (selectedItem_ == 2) {
-        // quit
-        quit_ = true;
+        this->notify(Action::QUIT);
     }
 }

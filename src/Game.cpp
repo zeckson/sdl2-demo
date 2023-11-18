@@ -19,20 +19,18 @@ void Game::input() {
             isRunning = false;
         }
 
-        if (event.type == SDL_KEYDOWN) {
-            // TODO: switch menu/engine state
-
-            if (event.key.keysym.scancode == SDL_SCANCODE_ESCAPE) {
-                isRunning = false;
-            }
+        if (menu.isActive()) {
+            menu.handleEvent(event);
+        } else {
+            world.handleEvent(event);
         }
-
-        world.handleEvent(event);
     }
 }
 
 void Game::update() {
-    world.update();
+    if (!menu.isActive()) {
+        world.update();
+    }
 
     if (world.getPlayer()->state == State::DEAD) {
         isRunning = DEMO_MODE;
@@ -46,6 +44,9 @@ void Game::render() {
     SDL_RenderClear(renderer);
 
     world.render(renderer);
+    if (menu.isActive()) {
+        menu.render(renderer);
+    }
 
     frameRate.render(app);
 
@@ -98,5 +99,26 @@ void Game::exit() {
     delete &app;
 }
 
-Game::Game(App &app) : app(app), world(app) {
+void Game::performAction(Action action) {
+    switch (action) {
+        case Action::PAUSE:
+            menu.setActive(true);
+            break;
+        case Action::RESUME:
+            menu.setActive(false);
+            break;
+        case Action::QUIT:
+            isRunning = false;
+            break;
+        case Action::RESTART:
+//            world.restart();
+            break;
+        default:
+            printf("Unknonw action recieved");
+    }
+}
+
+Game::Game(App &app) : app(app), world(app), menu(&app) {
+    menu.addListener(this);
+    world.addListener(this);
 }

@@ -8,6 +8,7 @@
 #include <SDL_render.h>
 #include <SDL_events.h>
 #include "World.h"
+#include "Menu.h"
 
 struct FrameRate {
     int frameCount = 0;
@@ -17,7 +18,7 @@ struct FrameRate {
     void render(const App &app);
 };
 
-class Game {
+class Game: private ActionListener {
 public:
     explicit Game(App &app);
 
@@ -28,6 +29,7 @@ public:
 private:
     App &app;
     World world;
+    Menu menu;
 
     bool isRunning = true;
 
@@ -38,6 +40,8 @@ private:
     void update();
 
     void render();
+
+    void performAction(Action action) override;
 };
 
 #endif //SDL2_DEMO_GAME_H

@@ -4,23 +4,25 @@
 #include <SDL.h>
 #include <SDL_ttf.h>
 #include <iostream>
+#include <memory>
 #include <vector>
 #include "App.h"
+#include "Action.h"
 
-class Menu {
+class Menu: public Subject {
 public:
-    Menu(App* app, const std::vector<std::string>& items);
-    void render();
+    explicit Menu(App* app);
+    void render(SDL_Renderer* pRenderer);
     void handleEvent(const SDL_Event& event);
     void performAction();
-    bool quit() const { return quit_; }
-    void setQuit(bool quit) { quit_ = quit; }
+    bool isActive() const { return active_; }
+    void setActive(bool active) { active_ = active; }
 
 private:
     App* app_;
     const std::vector<std::string>& menuItems_;
     int selectedItem_;
-    bool quit_ = false;
+    bool active_ = false;
 };
 
 #endif

@@ -44,6 +44,12 @@ void World::update() {
 void World::handleEvent(const SDL_Event &event) {
     // Handle each specific event
     if (event.type == SDL_KEYDOWN) {
+
+        // Show menu on escape
+        if (event.key.keysym.scancode == SDL_SCANCODE_ESCAPE) {
+            this->notify(Action::PAUSE);
+        }
+
         const SDL_Keysym &keysym = event.key.keysym;
 
         if (lastKeyDown == keysym.scancode) {
