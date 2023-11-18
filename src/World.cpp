@@ -39,6 +39,10 @@ void World::update() {
         delete entity;
     }
 
+    if (this->getPlayer()->state == State::DEAD) {
+        this->notify(Action::PAUSE);
+    }
+
 }
 
 void World::handleEvent(const SDL_Event &event) {
@@ -79,5 +83,10 @@ void World::render(SDL_Renderer *pRenderer) {
     for (const auto entity: entities) {
         entity->render(pRenderer);
     }
+}
+
+void World::restart() {
+    this->entities.clear();
+    this->enemies.clear();
 }
 

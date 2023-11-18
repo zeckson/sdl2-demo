@@ -20,8 +20,6 @@
 #define FONT_PATH               "gfx/glitchgoblin.ttf"
 #define DEFAULT_FONT_SIZE       24
 
-#define DEMO_MODE               true
-
 enum Texture {
     PLAYER = 0,
     FIREBALL = 1,

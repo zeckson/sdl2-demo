@@ -20,7 +20,11 @@ public:
         rect.y = rect.y - rect.h / 2;
     };
 
-    virtual ~Entity() = default;
+    virtual ~Entity() {
+        SDL_LogMessage(SDL_LOG_CATEGORY_APPLICATION, SDL_LOG_PRIORITY_DEBUG,
+                       "Entity destroyed");
+
+    };
 
     SDL_Texture &texture;
     SDL_Rect rect;

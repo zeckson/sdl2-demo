@@ -31,10 +31,6 @@ void Game::update() {
     if (!menu.isActive()) {
         world.update();
     }
-
-    if (world.getPlayer()->state == State::DEAD) {
-        isRunning = DEMO_MODE;
-    }
 }
 
 void Game::render() {
@@ -87,7 +83,7 @@ bool Game::run() {
     Sint64 delay = RENDER_DELAY - duration;
     delay = delay > 0 ? delay : 1;
 
-    SDL_LogDebug(SDL_LOG_CATEGORY_APPLICATION, "Update delay: %lldms", delay);
+    SDL_LogVerbose(SDL_LOG_CATEGORY_APPLICATION, "Update delay: %lldms", delay);
 
     // BC! We use vertical sync in render options
     //    SDL_Delay(delay);

@@ -36,6 +36,8 @@ public:
 
     void render(SDL_Renderer *pRenderer);
 
+    void restart();
+
 private:
     Entity* player;
     SDL_Scancode lastKeyDown = SDL_SCANCODE_UNKNOWN;
