@@ -14,17 +14,16 @@ class Entity;
 
 class World: public Subject {
 public:
-    explicit World(App &app) : width(app.width), height(app.height), factory(*(new EntityFactory(app))) {
-        player = reinterpret_cast<Entity *>(factory.createPlayer());
-        entities.push_back(player);
+    explicit World(App &app) : factory(*(new EntityFactory(app))), app(app) {
+        this->restart();
     };
 
     Entity* getPlayer() {
         return player;
     };
 
-    int width;
-    int height;
+    const int &width() { return app.width; };
+    const int &height() { return app.height; };
 
     std::list<Entity*> entities{};
     std::list<Entity*> enemies{};
@@ -38,8 +37,11 @@ public:
 
     void restart();
 
+    bool isDead();
+
 private:
     Entity* player;
+    App& app;
     SDL_Scancode lastKeyDown = SDL_SCANCODE_UNKNOWN;
 };
 

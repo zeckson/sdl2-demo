@@ -100,14 +100,13 @@ void Game::performAction(Action action) {
         case Action::PAUSE:
             menu.setActive(true);
             break;
+        case Action::RESTART:
+            world.restart();
         case Action::RESUME:
             menu.setActive(false);
             break;
         case Action::QUIT:
             isRunning = false;
-            break;
-        case Action::RESTART:
-//            world.restart();
             break;
         default:
             printf("Unknonw action recieved");

@@ -14,13 +14,13 @@ bool Player::update(World &world) {
     //bounds checking and correction
     if (rect.x < 0) {
         rect.x = 0;
-    } else if (rect.x + rect.w - 1 >= world.width) {
-        rect.x = world.width - rect.w;
+    } else if (rect.x + rect.w - 1 >= world.width()) {
+        rect.x = world.width() - rect.w;
     }
     if (rect.y < 0) {
         rect.y = 0;
-    } else if (rect.y + rect.h - 1 >= world.height) {
-        rect.y = world.height - rect.h;
+    } else if (rect.y + rect.h - 1 >= world.height()) {
+        rect.y = world.height() - rect.h;
     }
 
     if (fire) {

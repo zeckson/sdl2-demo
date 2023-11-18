@@ -14,7 +14,7 @@ bool Enemy::update(World &world) {
         player->state = State::DEAD;
     }
 
-    return rect.y > world.height;
+    return rect.y > world.height();
 }
 
 void Enemy::onKeyDown(const SDL_Keysym &key) {

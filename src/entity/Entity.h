@@ -16,8 +16,7 @@ class Entity {
 public:
     Entity(SDL_Texture &texture, int x, int y) : texture(texture), rect{x, y, 0, 0} {
         SDL_QueryTexture(&texture, nullptr, nullptr, &rect.w, &rect.h);
-        rect.x = rect.x - rect.w / 2;
-        rect.y = rect.y - rect.h / 2;
+        this->setPosition(x, y);
     };
 
     virtual ~Entity() {
@@ -29,6 +28,8 @@ public:
     SDL_Texture &texture;
     SDL_Rect rect;
     State state = State::ALIVE;
+
+    void setPosition(int x, int y);
 
     virtual bool update(World &world) = 0;
 

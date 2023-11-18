@@ -1,7 +1,7 @@
 #include "Menu.h"
 #include "App.h"
 
-Menu::Menu(App *app): app_(app), menuItems_(*(new std::vector<std::string>({"Restart/Continue", "Quit"}))), selectedItem_(0) {}
+Menu::Menu(App *app): app_(app), menuItems_(*(new std::vector<std::string>({"Restart", "Quit"}))), selectedItem_(0) {}
 
 void Menu::render(SDL_Renderer* pRenderer) {
     auto renderer_ = pRenderer;
@@ -42,6 +42,9 @@ void Menu::handleEvent(const SDL_Event& event) {
             case SDLK_RETURN:
             case SDLK_SPACE:
                 performAction();
+                break;
+            case SDLK_ESCAPE:
+                this->notify(Action::RESUME);
                 break;
         }
     }

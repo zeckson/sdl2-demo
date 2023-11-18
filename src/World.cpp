@@ -6,7 +6,7 @@
 
 void World::update() {
     int rnd = std::rand();
-    int maxEnemies = this->width / PLAYER_WIDTH;
+    int maxEnemies = (this->app.width) / PLAYER_WIDTH;
 
     if (this->enemies.size() < maxEnemies && (rnd % 10 == 0)) {
 
@@ -39,7 +39,7 @@ void World::update() {
         delete entity;
     }
 
-    if (this->getPlayer()->state == State::DEAD) {
+    if (isDead()) {
         this->notify(Action::PAUSE);
     }
 
@@ -88,5 +88,14 @@ void World::render(SDL_Renderer *pRenderer) {
 void World::restart() {
     this->entities.clear();
     this->enemies.clear();
+
+    player = reinterpret_cast<Entity *>(factory.createPlayer(app.width / 2, app.height));
+    player->state = State::ALIVE;
+    player->setPosition(width() / 2, height());
+    entities.push_back(player);
+}
+
+bool World::isDead() {
+    return this->getPlayer()->state == State::DEAD;
 }
 
