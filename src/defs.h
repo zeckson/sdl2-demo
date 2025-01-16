@@ -14,7 +14,7 @@
 #define PLAYER_HEIGHT  100
 #define PLAYER_SPEED   (PLAYER_WIDTH / 4)
 
-#define PLAYER_TEXTURE_PATH     "gfx/spaceship.png"
+#define PLAYER_TEXTURE_PATH     "gfx/sambik.png"
 #define ENEMY_TEXTURE_PATH      "gfx/tank.png"
 #define FIREBALL_TEXTURE_PATH   "gfx/fireball.png"
 #define FONT_PATH               "gfx/glitchgoblin.ttf"
